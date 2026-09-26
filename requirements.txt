@@ -1,0 +1,16 @@
+# ---- 运行时依赖 ----
+PySide6>=6.9                      # Qt 官方 Python 绑定（LGPLv3）
+PySide6-Fluent-Widgets[full]>=1.11  # Fluent 组件库；full 版支持亚克力/云母效果
+
+# ---- 可选 ----
+# 首页「一言」用它联网；没装会自动退回标准库 urllib，功能不受影响
+requests>=2.31
+
+# ---- 平台相关 ----
+# Win11 上是"硬依赖"：无边框窗口的边缘拉伸、最大化按钮悬停预测、
+# 云母/亚克力背景全部走 pywin32。漏装不会报错，但窗口边角会失灵。
+pywin32>=306; sys_platform == "win32"
+
+# ---- 打包（按需）----
+PyInstaller>=6.0
+# Nuitka>=2.0   # 追求小体积 / 源码保护时改用 Nuitka

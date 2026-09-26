@@ -1,0 +1,53 @@
+# ---- 构建产物（可再生成）----
+build/
+dist/
+installer/Output/
+*.pyz
+*.pkg
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyd
+*.egg-info/
+.venv/
+venv/
+
+# ---- 内嵌 RVC 工程 ----
+# 8.4 GB / 3.6 万个文件，且含 torch 的 GB 级 .dll：
+# GitHub 单文件上限 100 MB、仓库建议不超过 1 GB，塞进去必然 push 失败。
+# 它不入库 —— clone 下来后按 README「补齐 RVC 工程」一节自行放置。
+#
+# ⚠️ 必须写成**根目录锚定**（前面带 /）。Windows 下 git 默认
+#    core.ignorecase=true，写裸的 `RVC*/` 会大小写不敏感地命中 app/rvc/，
+#    把整个推理引擎目录静默排除掉 —— 提交完一数少 8 个文件才发现。
+/RVC20260718DML/
+/RVC20240604AMD_Intel/
+/RVC*/
+
+# ---- Qt ----
+# .ui / .qrc 是 UI 设计的真身，必须提交；只有自动生成的中间件才忽略
+*_ui.py
+*_rc.py
+.ui_autogen/
+/config/           # 早期 bug 留下来的空目录，配置实际在 %APPDATA%\LinVox\
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- 敏感信息 ----
+.env
+.env.*
+config.local.*
+*.db
+*.key
+*.pem

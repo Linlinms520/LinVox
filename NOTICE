@@ -1,0 +1,75 @@
+LinVox
+Copyright (C) 2026 LinVox contributors
+
+本文件按 GPLv3 第 4 条（保留版权与许可声明）列出本项目依赖的第三方组件及其协议。
+每项的协议全文见各自项目主页；分发本软件（源码或打包产物）时本文件需一并保留。
+
+
+一、运行时依赖
+----------------------------------------------------------------------------
+1. PySide6（Qt for Python）  6.11.2
+   LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only（三选一）
+   © The Qt Company — https://pyside.org
+   本项目选择 LGPLv3 这一支：动态链接 Qt 库，不静态链接进单一可执行文件，
+   用户可自行替换 Qt 动态库。
+
+2. PySide6-Fluent-Widgets（qfluentwidgets）  1.11.3
+   GPLv3（非商业用途免费；商业使用需向作者购买商业授权）
+   © 2021 zhiyiYo — https://qfluentwidgets.com
+   https://github.com/zhiyiYo/PyQt-Fluent-Widgets
+
+3. PySideSix-Frameless-Window  0.8.2
+   LGPLv3
+   © zhiyiYo — https://github.com/zhiyiYo/PyQt-Frameless-Window/tree/PySide6
+   （由 PySide6-Fluent-Widgets 间接依赖，提供无边框窗口）
+
+4. darkdetect  0.8.0
+   BSD-3-Clause
+   © Alberto Sottile — https://github.com/albertosottile/darkdetect
+
+5. pywin32  312
+   PSF License
+   © Mark Hammond — https://github.com/mhammond/pywin32
+   （Windows 平台：无边框窗口边缘拉伸、云母/亚克力背景）
+
+6. requests  2.x（可选）
+   Apache-2.0
+   © Kenneth Reitz — https://requests.readthedocs.io
+   未安装时首页「一言」自动退回标准库 urllib，功能不受影响。
+
+
+二、构建期依赖（不随成品分发）
+----------------------------------------------------------------------------
+7. PyInstaller  6.x
+   GPLv2-or-later（附带特殊例外：允许用 PyInstaller 打包并分发闭源程序）
+   © PyInstaller Development Team — https://pyinstaller.org
+
+8. Pillow / NumPy
+   各自的自有许可证（Pillow 为 HPND 类，NumPy 为 BSD-3-Clause），仅用于
+   tools/make_brand.py 生成图标与横幅，不进入打包产物。
+
+
+三、内嵌的 RVC 工程（不随本仓库分发）
+----------------------------------------------------------------------------
+LinVox 运行所需的 RVC 工程（`RVC20260718DML/`，约 8.4 GB）**不在本仓库内**，
+其自带的 runtime 解释器含 torch、faiss 等组件，各自协议由 RVC 上游项目规定。
+获取与放置方式见 README「补齐 RVC 工程」一节。用户需自行遵守上游协议。
+
+
+四、字体与素材
+----------------------------------------------------------------------------
+- 界面字体使用系统字体（Microsoft YaHei / Segoe UI），不随本仓库分发。
+- app/resources/ 下的 logo.png / logo.ico / title.jpg 由 tools/make_brand.py
+  从自有原图生成，原图不入库。
+
+
+五、创作方式（人机协作）
+----------------------------------------------------------------------------
+本项目是**人机协作**产物：源码主要由 AI 辅助起草，经作者审阅、修改、调试后定稿。
+
+- 人工贡献清单：docs/HUMAN_CONTRIBUTION.md
+- AI 使用痕迹存档：docs/ai-logs/
+- 版权归属：自然人作者，不署 AI 工具名（AI 工具不是权利人）
+
+本仓库**未做逐文件的 LICENSE 拆分**（未加 SPDX 头），因此按项目整体声明：
+上述第一至四节所列第三方组件的协议不受本项目创作方式影响，仍按其原协议执行。

@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "linvox"
+version = "1.0.0"
+description = "基于 PySide6 + QFluentWidgets 的桌面应用脚手架，内置 RVC 实时变声 / 文件变声 / 训练 / 分离全流程"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "GPL-3.0-or-later" }
+keywords = ["PySide6", "qfluentwidgets", "RVC", "voice-conversion", "desktop"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Multimedia :: Sound/Audio",
+]
+dependencies = [
+    # ⚠️ Fluent Widgets 有 PyQt5 / PyQt6 / PySide2 / PySide6 四个变体，
+    #    包名统统叫 qfluentwidgets，混装必闪退 —— 这里只锁定 PySide6 这一个。
+    "PySide6>=6.9,<7",
+    "PySide6-Fluent-Widgets[full]>=1.11,<2",
+    # Win11 上的硬依赖：无边框窗口边缘拉伸、最大化按钮悬停预测、云母/亚克力背景
+    "pywin32>=306; sys_platform == 'win32'",
+    # 可选：首页「一言」联网用；没装自动退回标准库 urllib
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+# 打包成 exe：pyinstaller LinVox.spec --noconfirm
+packaging = ["PyInstaller>=6.0"]
+# 跑测试：python tests/test_smoke.py
+dev = ["pytest>=7.0"]
+# 生成图标/横幅素材：python tools/make_brand.py --src D:/a.jpg
+brand = ["Pillow>=10"]
+
+[project.scripts]
+linvox = "LinVox:main"
+
+[tool.setuptools]
+py-modules = ["LinVox"]
+
+# 说明：app/ 是内部包，随 LinVox.py 一起作为顶层模块分发；
+# 本项目的常规用法是 `python LinVox.py`，上面的 console script 只是方便 pip 安装后直接敲 linvox。
